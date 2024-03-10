@@ -3,6 +3,8 @@ const bodyParser = require("body-parser");
 const app = express();
 const router = require("./routes/route");
 
+require("dotenv").config();
+
 require("./db/connect");
 
 app.use(express.json());
