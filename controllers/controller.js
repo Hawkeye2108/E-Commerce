@@ -6,9 +6,8 @@ const uploadHandler = (req,res)=>{
 
 const registerHandler = async(req,res)=>{
   try {
-    console.log(req.body);
-    // const user = new User(req.body);
-    // await user.save();
+    const user = new User(req.body);
+    await user.save();
     res.status(200).json({message:"User Registered Successfully"});
   } catch (error) {
     console.log(error);
