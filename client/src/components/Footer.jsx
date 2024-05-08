@@ -16,7 +16,7 @@ const Footer = () => {
         </div>
         <div className='font-mid text-gray-400 flex flex-col gap-3'>
           <h3 className='font-bold text-white'>Get in touch</h3>
-          <p>Email: Nairon@gmail.com</p>
+          <p>Email: bookbazaar@gmail.com</p>
           <p>Phone No. : +91 9999999999</p>
         </div>
         </div> 

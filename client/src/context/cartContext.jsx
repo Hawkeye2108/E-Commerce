@@ -4,7 +4,7 @@ export const CartContext = createContext();
 
 const fetchUserDetails = async(user)=>{
   console.log("fetchUserDetails is called")
-   const res  = await fetch("http://localhost:4000/api/user/details",{
+   const res  = await fetch("https://e-commerce-1-p1gt.onrender.com/api/user/details",{
      method:"POST",
      body:JSON.stringify(user),
      headers:{

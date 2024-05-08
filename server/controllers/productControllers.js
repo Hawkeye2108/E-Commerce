@@ -3,9 +3,17 @@ const User = require("../models/UserModel")
 
 const getAllProducts = async (req,res)=>{
   //  return res.json({mssg:"valid"});
+  // console.log(req.query);
+  // const query = {};
+  let title = "";
+  if(req.query.title){
+    // query.title = req.query.title;
+    title = req.query.title;
+  }
+  // console.log(query);
    try{
-     const products = await Product.find({});
-     console.log("get all products called = ",products);
+     const products = await Product.find({title:{$regex:title,$options:"i"}});
+    //  console.log("get all products called = ",products);
      res.status(200).json(products);
    }
    catch(error){

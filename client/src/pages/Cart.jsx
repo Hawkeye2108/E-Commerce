@@ -26,7 +26,7 @@ function Cart() {
 
 
   const removeAllProducts = async ()=>{
-    const res = await fetch("http://localhost:4000/api/product/removeAllProducts",{
+    const res = await fetch("https://e-commerce-1-p1gt.onrender.com/api/product/removeAllProducts",{
         method:"POST",
         headers:{
             "Content-Type":"application/json",
@@ -46,7 +46,7 @@ function Cart() {
         alert("Razorpay SDK failed to load. Are you online?");
         return;
     }
-    const result = await fetch("http://localhost:4000/api/payment/createOrder",{
+    const result = await fetch("https://e-commerce-1-p1gt.onrender.com/api/payment/createOrder",{
         method:"POST",
         body:JSON.stringify({amount:(sum+20)*100,curreny:"INR"}),
         headers:{
@@ -92,7 +92,7 @@ function Cart() {
           
 
 
-           let res = await fetch("http://localhost:4000/api/payment/verifyOrder",{
+           let res = await fetch("https://e-commerce-1-p1gt.onrender.com/api/payment/verifyOrder",{
             method:"POST",
             body:JSON.stringify({order_id: response.razorpay_order_id, payment_id: response.razorpay_payment_id}),
             headers:{

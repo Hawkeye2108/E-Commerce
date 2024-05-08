@@ -15,7 +15,7 @@ function Login() {
     e.preventDefault();
     console.log(email,password);
 
-    const res = await fetch("http://localhost:4000/api/user/login",{
+    const res = await fetch("https://e-commerce-1-p1gt.onrender.com/api/user/login",{
       method:"post",
       body:JSON.stringify({email,password}),
       headers:{

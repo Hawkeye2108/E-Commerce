@@ -18,7 +18,7 @@ function Signup() {
    const data = {name,email,password};
    console.log(data);
 
-    const res = await fetch("http://localhost:4000/api/user/register",{
+    const res = await fetch("https://e-commerce-1-p1gt.onrender.com/api/user/register",{
         method:"POST",
         body:JSON.stringify(data),
         headers:{

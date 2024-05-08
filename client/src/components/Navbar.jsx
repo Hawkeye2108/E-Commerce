@@ -37,7 +37,7 @@ console.log("cart.length = ",cart.length)
         <div className='flex gap-8 items-center ml-2'>
             <div className='flex items-center gap-5'>
           <FiMenu className='text-2xl cursor-pointer lg:hidden' onClick={()=>setToggle(true)}/>
-          <Link to="/" className='text-2xl font-serif font-bold'>Nairon</Link>
+          <Link to="/" className='text-2xl font-serif font-bold'>Book Bazaar</Link>
           </div>
                 <Link to="/" className='hidden lg:block text-xl font-medium text-gray-400 hover:text-black'>Home</Link>
                 <Link to="/collection" className='hidden lg:block text-xl font-medium text-gray-400 hover:text-black'>Collection</Link>

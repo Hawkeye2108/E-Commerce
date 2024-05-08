@@ -1,10 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
 function Home() {
-  const [toggle,setToggle] = useState(false);
   const keyframes = `
   @keyframes moveRight {
     from {
@@ -65,8 +64,8 @@ function Home() {
         } */}
     {/* Hero */}
     <div className='bg-amber-600 flex-1 flex flex-col justify-center items-center w-full h-full'>
-      <h1 className='text-5xl text-white font-light text-center m-4' style={{maxWidth:"400px"}}>Discover the power of Jewellerys</h1>
-      <p className='text-2xl text-white font-light'>The luxury of care you</p>
+      <h1 className='text-5xl text-white font-bold text-center m-4' style={{maxWidth:"500px"}}>Find the book you're looking for</h1>
+      <p className='text-2xl text-white font-light'>For students within campus</p>
       <div className=' w-full flex justify-center'>
         <button className='p-1 text-black bg-white px-8 font-bold m-3' style={{border:" 1px solid white"}}>
           <Link to="/collection">Shop all</Link>

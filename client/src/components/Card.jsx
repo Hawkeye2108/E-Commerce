@@ -17,7 +17,7 @@ function Card({item}) {
      console.log("Product _id = ",_id);
    console.log("item = ",item)
    console.log("addtocart token = ",token)
-      const res = await fetch("http://localhost:4000/api/product/add",{
+      const res = await fetch("https://e-commerce-1-p1gt.onrender.com/api/product/add",{
       method:"POST",
       body:JSON.stringify({...item}),
       headers:{

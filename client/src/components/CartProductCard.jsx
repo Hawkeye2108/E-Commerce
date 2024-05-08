@@ -9,7 +9,7 @@ function CartProductCard() {
     const addToCart = async({title,desc,price,image,productID})=>{
         console.log("item = ",{title,desc,price,image,productID})
           // we have to pass productId as _id because in addProduct api it is extracted as _id
-           const res = await fetch("http://localhost:4000/api/product/add",{
+           const res = await fetch("https://e-commerce-1-p1gt.onrender.com/api/product/add",{
            method:"POST",
            body:JSON.stringify({title,desc,price,image,_id:productID, quantity: cart.find((element)=>element.productID === productID).quantity+1}),
            headers:{
@@ -29,7 +29,7 @@ function CartProductCard() {
         console.log("remove from cart called, quantity = ",quantity,"productID = ",productID);
         if(quantity<=0)
         return ;
-        const res = await fetch("http://localhost:4000/api/product/remove",{
+        const res = await fetch("https://e-commerce-1-p1gt.onrender.com/api/product/remove",{
             method:"POST",
             body:JSON.stringify({_id:productID}),
             headers:{
