@@ -5,6 +5,7 @@ import { Link} from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Loader from '../components/Loader';
+import Pagination from '../components/Pagination';
 
 function Collection() {
   const {email,cart,dispatch} = useCartContext();
@@ -14,18 +15,29 @@ function Collection() {
   const [searchData, setSearchData] = useState([]);
   const [selectedItem, setSelectedItem] = useState(-1);
   const [enter, setEnter] = useState(false);
+  const [pages, setPages] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
 //   const [category, setCategory] = useState("");
 const fetchAllProducts = async ()=>{
     try{
         setLoading(true);
         // const res = await fetch("https://e-commerce-1-p1gt.onrender.com/api/product");
-        const res = await fetch(`https://e-commerce-1-p1gt.onrender.com/api/product?title=${search}`);
-        console.log(res)
+        // const res = await fetch(`https://e-commerce-1-p1gt.onrender.com/api/product?title=${search}`);
+        const res = await fetch(`http://localhost:4000/api/product?title=${search}&page=${currentPage}`)
+        // console.log(res)
         if(res.ok){
         const data = await res.json();
-        console.log("data gathering")
-        console.log(data)
-        setProducts(data);
+        // console.log("data gathering")
+        // console.log(data)
+        console.log("data = ",data);
+        setProducts(data.data);
+        let p = [];
+            for(let i=1; i<=data.totalPages; i++){
+                p.push(i);
+            }
+            setPages(p);
+        // setTotalPages(data.totalPages);
+            
         }
         else{
             setProducts([]);
@@ -39,17 +51,19 @@ const fetchAllProducts = async ()=>{
 }
   useEffect(()=>{
      fetchAllProducts();
-    },[]);
+    },[currentPage]);
 
     useEffect(()=>{
-        console.log("useEffect search = ",search);
-        console.log("useEffect enter = ",enter);
+        // console.log("useEffect search = ",search);
+        // console.log("useEffect enter = ",enter);
         const handleSearchData = async()=>{
         if(search!=="" && enter === false){
             try {
-                const res = await fetch(`https://e-commerce-1-p1gt.onrender.com/api/product?title=${search}`)
+                // const res = await fetch(`https://e-commerce-1-p1gt.onrender.com/api/product?title=${search}`)
+                const res = await fetch(`http://localhost:4000/api/product?title=${search}`)
                 if(res.ok){
                     const data = await res.json();
+                    cosnole.log("data = ",data);
                     setSearchData(data);
                 }
                 else{
@@ -57,8 +71,8 @@ const fetchAllProducts = async ()=>{
                 }
                     
             } catch (error) {
-                console.log(error);
-                console.log("Error occured setSerachData([])");
+                // console.log(error);
+                // console.log("Error occured setSerachData([])");
                 setSearchData([]);
             }
         }
@@ -72,12 +86,8 @@ const fetchAllProducts = async ()=>{
     },[search]);
 
 
-    // console.log(products);
-    console.log("loading = ",loading);
-    // if(search===""){
-    //     setSearchData([]);
-    //     // return;
-    // }
+    // console.log("loading = ",loading);
+
 
 
     const logOut = ()=>{
@@ -97,16 +107,24 @@ const fetchAllProducts = async ()=>{
     //       }
     //     }
     //   };
+    const handleSearchClick = (title)=>{
+        console.log("Pressed Enter = ",searchData[selectedItem]);
+                setEnter(true);
+                setSearch(title);
+                fetchAllProducts();
+                setSearchData([]);
+                console.log("Mouse Clicked = ",search);
+    }
     const handleSearch = (e)=>{
         setEnter(false);
         setSearch(e.target.value);
-        console.log("search = ",search);
+        // console.log("search = ",search);
     }
     const handleKeyDown = (e)=>{
-        console.log(e.key)
-        console.log("searchData.length = ",searchData.length)
+        // console.log(e.key)
+        // console.log("searchData.length = ",searchData.length)
         if(search===""){
-            console.log(e.key,"clear all");
+            // console.log(e.key,"clear all");
             setSearchData([]);
         }
         
@@ -118,7 +136,7 @@ const fetchAllProducts = async ()=>{
                 setSelectedItem(prev => prev+1);
             }
             else if(e.key === "Enter" && selectedItem>=0){
-                console.log("Pressed Enter = ",searchData[selectedItem]);
+                // console.log("Pressed Enter = ",searchData[selectedItem]);
                 setEnter(true);
                 setSearch(searchData[selectedItem].title);
                 fetchAllProducts();
@@ -133,7 +151,8 @@ const fetchAllProducts = async ()=>{
     }
    
     console.log("Products.map = ",products);
-
+    // console.log("pages = ",pages)
+   
   return (
     <>
     <Navbar/>
@@ -143,7 +162,11 @@ const fetchAllProducts = async ()=>{
         <input className="p-2 rounded-full w-1/2 px-6 bg-white text-black border-blue-300 border-2 outline-none" type="text" placeholder='Search' value={search} onChange={handleSearch} onKeyDown={handleKeyDown}/>
         <div className='w-1/2 px-4 absolute top-full'>
             {searchData?.map((data,index)=>{   
-                return <div key={index} className={`px-4 py-1 ${selectedItem===index?"bg-white":"bg-blue-100"}`}>{data.title}</div>
+                return <div key={index} className={`cursor-pointer hover:bg-white px-4 py-1 ${selectedItem===index?"bg-white":"bg-blue-100"}`} onclick={()=>handleSearchClick(data.title)} 
+                onMouseDown={()=>{
+                    
+                    handleSearchClick(data.title)}}
+                >{data.title}</div>
             })}
         </div>
         </div>
@@ -175,12 +198,30 @@ const fetchAllProducts = async ()=>{
         {/* Next Collection */}
         <div className='w-full h-full p-5 justify-center md:justify-around' style={{display:"grid", gridTemplateColumns:"repeat(auto-fill,300px)",gap:"30px"}}>
             
-            {!loading && products.length!=0 && products?.map((item)=>{
-            return(
+            {!loading && products.length!=0 && 
+            
+            products?.map((item)=>{
+            return(   
             <Card key={item._id} item={item}/>
             )
            })}
+           {/* <h1>Pages</h1> */}
+           {/* <Pagination totalPages={totalPages}/> */}
+           
+           
            </div>
+           <div>
+           <ul className='flex justify-center gap-4 my-6'>
+           { !loading && products.length!=0 &&
+             pages.map((page)=>{
+                return(
+                    <button key={page} className={`cursor-pointer font-bold py-1 px-2 rounded-md ${(page===currentPage)?"bg-red-500":" bg-slate-300"}`} onClick={()=>setCurrentPage(page)} >{page}</button>
+                )
+             })  
+           }
+           </ul>
+           </div>
+           {/* </div> */}
            {!loading && products?.length===0 && 
               <div className='flex justify-center'>
                 <h1 className='font-bold text-2xl'>No item found</h1>

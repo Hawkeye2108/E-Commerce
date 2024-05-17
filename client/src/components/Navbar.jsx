@@ -43,7 +43,7 @@ console.log("cart.length = ",cart.length)
                 <Link to="/collection" className='hidden lg:block text-xl font-medium text-gray-400 hover:text-black'>Collection</Link>
         </div>
         {/* Sidebar  */}
-         <div className={`text-black bg-white shadow-2xl flex flex-col absolute top-0 left-0 h-screen w-56 p-7 gap-8 ${toggle?"translate-x-0":"-translate-x-full"} transition-all`} >
+         <div className={`text-black bg-white shadow-2xl flex flex-col absolute z-10 top-0 left-0 h-screen w-56 p-7 gap-8 ${toggle?"translate-x-0":"-translate-x-full"} transition-all`} >
            <IoClose className='text-3xl mt-0 mb-8 cursor-pointer self-end' onClick={()=>setToggle(false)}/>
              {!email && <Link to="/login" className='font-bold text-xl text-green-600'>Log In</Link>}
              {!email && <Link to="/signup" className='font-bold text-xl text-green-600'>Sign Up</Link>}

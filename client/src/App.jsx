@@ -8,6 +8,7 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import { useCartContext } from './hooks/useCartContext'
 import SingleProduct from './pages/SingleProduct'
+import ProductForm from './pages/ProductForm'
 
 function App() {
   const {email} = useCartContext();
@@ -37,6 +38,10 @@ function App() {
     {
       path:"/singleProduct",
       element: <SingleProduct/>
+    },
+    {
+      path:"/productForm",
+      element:<ProductForm/>
     }
   ])
   return (

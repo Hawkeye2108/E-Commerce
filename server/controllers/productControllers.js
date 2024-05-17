@@ -10,11 +10,18 @@ const getAllProducts = async (req,res)=>{
     // query.title = req.query.title;
     title = req.query.title;
   }
+
   // console.log(query);
+  let page = 1;
+  if(req.query.page){
+    page = req.query.page;
+  }
+   const limit = 6;
    try{
-     const products = await Product.find({title:{$regex:title,$options:"i"}});
+     const products = await Product.find({title:{$regex:title,$options:"i"}}).skip((page-1)*limit).limit(limit*1).exec();
     //  console.log("get all products called = ",products);
-     res.status(200).json(products);
+    const total = await Product.find({title:{$regex: title, $options:"i"}}).countDocuments();
+     res.status(200).json({data:products, totalPages:(Math.ceil(total/limit)), currentPage:page});
    }
    catch(error){
     console.log(error);

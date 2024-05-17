@@ -9,15 +9,26 @@ const ProductSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    desc:{
+    category:{
+        type:String,
+        required:true
+    },
+    author:{
+        type:String,
+        required:true
+    },
+    publisher:{
         type:String,
         required:true
     },
     price:{
         type:Number,
         required:true
-    }
-
+    },
+    // edition:{
+    //     type:String,
+    //     required:true
+    // }
 })
 
 module.exports = mongoose.model("product",ProductSchema);

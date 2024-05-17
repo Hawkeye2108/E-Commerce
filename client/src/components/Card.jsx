@@ -6,7 +6,7 @@ function Card({item}) {
   const {email,token,dispatch} = useCartContext();
   
   console.log("token = ",token);
-  const {image,title,desc,price,_id} = item;
+  const {image,title,category,price,_id} = item;
 
   const navigate = useNavigate();
   const addToCart = async()=>{
@@ -34,7 +34,7 @@ function Card({item}) {
   }
   return (
    // 320 220 ,backgroundColor:"rgb(247, 246, 242)  width:"100%", height:"279px",      ,textOverflow:"ellipsis",overflow:"hidden",whiteSpace:"nowrap"
-   <div className='flex justify-center cursor-pointer hover:shadow-xl' style={{paddingBottom:"50px", borderRadius:"30px",height:"487px", marginBottom:"15px"}} onClick={()=>navigate("/singleProduct",{state:{item}})}>
+   <div className='flex justify-center cursor-pointer hover:shadow-xl' style={{paddingBottom:"50px", borderRadius:"30px",height:"460px", marginBottom:"15px"}} onClick={()=>navigate("/singleProduct",{state:{item}})}>
       <div className='flex flex-col h-full w-full'>
     {/* <div style={{width:"100%", height:"357px", paddingBottom:"50px", borderRadius:"30px"}} className='bg-blue-400'> */}
        <div style={{padding:"25px 25px 10px",backgroundColor:"#f5f5f5",borderRadius:"30px",width:"100%", height:"309px"}}>
@@ -53,8 +53,8 @@ function Card({item}) {
 
 
        <div className='flex flex-col items-center' style={{paddingTop:"15px"}}>
-       <h3 style={{fontWeight:"bold", fontSize:"20px",width:"100%", textAlign:"center"}}>{title}</h3>
-       {/* <p style={{marginLeft:"6%", fontSize:"13px",color:"grey",textOverflow:"ellipsis",overflow:"hidden",whiteSpace:"nowrap"}}>{desc}</p> */}
+       <h3 style={{fontWeight:"bold", fontSize:"20px",width:"100%", textAlign:"center", textOverflow:"ellipsis", whiteSpace:"nowrap", overflow:"hidden",padding:"0 4px"}}>{title} hii</h3>
+       <p style={{textAlign:"center", fontSize:"15px",color:"grey",textOverflow:"ellipsis",overflow:"hidden",whiteSpace:"nowrap", textTransform:"capitalize",padding:"4px"}}>Category: {category}</p>
        <p style={{marginRight:"6%",fontSize:"28px",fontWeight:"bold"}}>Rs. {price}</p>
        </div>
     </div>

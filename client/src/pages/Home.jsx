@@ -68,7 +68,7 @@ function Home() {
       <p className='text-2xl text-white font-light'>For students within campus</p>
       <div className=' w-full flex justify-center'>
         <button className='p-1 text-black bg-white px-8 font-bold m-3' style={{border:" 1px solid white"}}>
-          <Link to="/collection">Shop all</Link>
+          <Link to="/productForm">Sell Book</Link>
         </button>
         <button className='p-1 text-white bg-transparent px-8 font-bold m-3' style={{border:" 2px solid white"}}>
          <Link to="/collection"> See collections</Link>
@@ -78,6 +78,7 @@ function Home() {
       </div>
       {/* Footer  */}
       <Footer/>
+      
     </div>
     </>
   )
